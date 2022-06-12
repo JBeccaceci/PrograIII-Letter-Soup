@@ -1,3 +1,7 @@
+package model;
+
+import model.Posicion;
+
 import java.util.ArrayList;
 
 public interface ResolverEncontrarPalabraInterface {

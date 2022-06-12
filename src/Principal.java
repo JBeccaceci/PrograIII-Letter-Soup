@@ -1,3 +1,5 @@
+import model.Posicion;
+
 import java.util.ArrayList;
 
 public class Principal {
@@ -55,8 +57,8 @@ public class Principal {
             return;
 
         System.out.println("Las posiciones en que se encuentra la palabra son:");
-        for (int i = 0;i< posiciones.size();i++) {
-            System.out.print("("+posiciones.get(i).posX+";"+posiciones.get(i).posY+") - ");
+        for (Posicion pos : posiciones) {
+            System.out.print("(" + pos.posX + ";" + pos.posY + ") - ");
         }
     }
 }
