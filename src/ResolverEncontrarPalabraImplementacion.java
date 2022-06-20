@@ -77,15 +77,19 @@ public class ResolverEncontrarPalabraImplementacion implements ResolverEncontrar
         this.path.add(new Posicion(posX, posY));
         boolean result;
         if (direction == 0) {
+            // Primer ejecucion, buscamos en las tres direcciones
             result = findInLetterSoup(soup,posX + 1, posY, offset + 1, word, longX, longY, 1) ||
                     findInLetterSoup(soup, posX, posY + 1, offset + 1, word, longX, longY, -1) ||
                     findInLetterSoup(soup, posX + 1, posY + 1, offset + 1, word, longX, longY, -2);
         } else {
             if (direction == 1) {
+                // Derecha
                 result = findInLetterSoup(soup,posX + 1, posY, offset + 1, word, longX, longY, 1);
             } else if (direction == -1) {
+                // Abajo
                 result = findInLetterSoup(soup, posX, posY + 1, offset + 1, word, longX, longY, -1);
             } else {
+                // Diagonal
                 result = findInLetterSoup(soup, posX + 1, posY + 1, offset + 1, word, longX, longY, -2);
             }
         }
