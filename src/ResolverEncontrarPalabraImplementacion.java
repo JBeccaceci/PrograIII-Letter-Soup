@@ -31,7 +31,7 @@ public class ResolverEncontrarPalabraImplementacion implements ResolverEncontrar
     public ArrayList<Posicion> execute(char[][] soup, int longX, int longY, String word) {
         for (int i = 0; i < soup.length; i++) {
             for (int j = 0; j < soup[i].length; j++) {
-                if (this.findInLetterSoup(soup, i, j, 0, word, longX, longY)) {
+                if (this.findInLetterSoup(soup, i, j, 0, word, longX, longY, 0)) {
                     return this.solution;
                 }
                 this.solution.clear();
@@ -64,7 +64,7 @@ public class ResolverEncontrarPalabraImplementacion implements ResolverEncontrar
      * @param longY
      * @return
      */
-    private boolean findInLetterSoup(char[][] soup, int posX, int posY, int offset, String word, int longX, int longY) {
+    private boolean findInLetterSoup(char[][] soup, int posX, int posY, int offset, String word, int longX, int longY, int direction) {
         if (offset == word.length())
             return true;
 
@@ -75,9 +75,20 @@ public class ResolverEncontrarPalabraImplementacion implements ResolverEncontrar
         }
 
         this.path.add(new Posicion(posX, posY));
-        boolean result = findInLetterSoup(soup,posX + 1, posY, offset + 1, word, longX, longY) ||
-                findInLetterSoup(soup, posX, posY + 1, offset + 1, word, longX, longY) ||
-                findInLetterSoup(soup, posX + 1, posY + 1, offset + 1, word, longX, longY);
+        boolean result;
+        if (direction == 0) {
+            result = findInLetterSoup(soup,posX + 1, posY, offset + 1, word, longX, longY, 1) ||
+                    findInLetterSoup(soup, posX, posY + 1, offset + 1, word, longX, longY, -1) ||
+                    findInLetterSoup(soup, posX + 1, posY + 1, offset + 1, word, longX, longY, -2);
+        } else {
+            if (direction == 1) {
+                result = findInLetterSoup(soup,posX + 1, posY, offset + 1, word, longX, longY, 1);
+            } else if (direction == -1) {
+                result = findInLetterSoup(soup, posX, posY + 1, offset + 1, word, longX, longY, -1);
+            } else {
+                result = findInLetterSoup(soup, posX + 1, posY + 1, offset + 1, word, longX, longY, -2);
+            }
+        }
 
         this.removePath(posX, posY);
         this.solution.add(new Posicion(posX, posY));
