@@ -68,7 +68,7 @@ public class ResolverEncontrarPalabraImplementacion implements ResolverEncontrar
         if (offset == word.length())
             return true;
 
-        if (posX > longX || posY > longY
+        if (posX > longX - 1 || posY > longY - 1
                 || soup[posX][posY] != word.charAt(offset)
                 || pathIncluded(posX, posY)) {
             return false;
@@ -95,7 +95,9 @@ public class ResolverEncontrarPalabraImplementacion implements ResolverEncontrar
         }
 
         this.removePath(posX, posY);
-        this.solution.add(new Posicion(posX, posY));
+        if (result) {
+            this.solution.add(new Posicion(posX, posY));
+        }
         return result;
     }
 

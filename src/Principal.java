@@ -17,7 +17,7 @@ public class Principal {
         matrizLetras [3][0] = 'p';
         matrizLetras [4][0] = 's';
 
-        matrizLetras [0][1] = 'c';
+        matrizLetras [0][1] = 'a';
         matrizLetras [1][1] = 'a';
         matrizLetras [2][1] = 'l';
         matrizLetras [3][1] = 'l';
@@ -47,7 +47,7 @@ public class Principal {
         matrizLetras [3][5] = 'w';
         matrizLetras [4][5] = 'k';
 
-        ArrayList<Posicion> posiciones = encontrarPalabra.resolverEncontrarPalabra(matrizLetras,n,m,"casa");
+        ArrayList<Posicion> posiciones = encontrarPalabra.resolverEncontrarPalabra(matrizLetras,n,m,"messi");
 
         imprimirPosiciones(posiciones);
     }
