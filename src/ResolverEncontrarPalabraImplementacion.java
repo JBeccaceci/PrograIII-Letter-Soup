@@ -70,9 +70,31 @@ public class ResolverEncontrarPalabraImplementacion implements ResolverEncontrar
 
         if (posX > longX - 1 || posY > longY - 1
                 || soup[posX][posY] != word.charAt(offset)
-                || pathIncluded(posX, posY)) {
+                || pathIncluded(posX, posY)) { // O(n)
             return false;
         }
+
+        // Validamos que el resto de la cadena no sobrepase las dimensiones de la matriz (Poda)
+        if (direction != 0) {
+            boolean a = (longX - posX) < (word.length() - offset);
+            boolean b = (longY - posY) < (word.length() - offset);
+            if (direction == 1) {
+                if (a) {
+                    return false;
+                }
+            } else if (direction == -1) {
+                if (b) {
+                    return false;
+                }
+            } else {
+                if (a || b) {
+                    return false;
+                }
+            }
+        }
+
+        // Validar si el largo de la palabra sobrepasa la matriz
+        // 1 ^ LONGITUD(Palabra) + (N ^ 2)
 
         this.path.add(new Posicion(posX, posY));
         boolean result;
@@ -94,7 +116,7 @@ public class ResolverEncontrarPalabraImplementacion implements ResolverEncontrar
             }
         }
 
-        this.removePath(posX, posY);
+        this.removePath(posX, posY); // O(n)
         if (result) {
             this.solution.add(new Posicion(posX, posY));
         }
